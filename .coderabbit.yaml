@@ -1,0 +1,4 @@
+language: "ja-JP"
+reviews:
+  summary:
+    poem: false
