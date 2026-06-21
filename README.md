@@ -40,7 +40,7 @@ $ docker run --rm -v "$PWD:/workdir" --workdir /workdir genzouw/csvtool transpos
 **I recommend that you set the following alias in `~/.*rc`.**
 
 ```bash
-$ alias csvtool='docker run --rm -v "$PWD:/workdir" --workdir /workdir genzouw/csvtool'
+alias csvtool='docker run --rm -v "$PWD:/workdir" --workdir /workdir genzouw/csvtool'
 ```
 
 Then you can easily call the command.
