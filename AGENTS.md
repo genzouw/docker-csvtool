@@ -1,6 +1,6 @@
 # AGENTS.md — AI コーディングエージェント向けポリシー
 
-本ドキュメントは、自律型コーディングエージェント (Jules / Devin / Codex / Claude Code / GitHub Copilot / Cursor / Cline / Windsurf / Aider / Sweep / PR-Agent 等) が、公開 OSS リポジトリ [`genzouw/docker-csvtool`](https://github.com/genzouw/docker-csvtool) で作業し Pull Request を作成するときに **必ず守るべき規範** を定義します。
+本ドキュメントは、自律型コーディングエージェント (Jules / Devin / Codex / Claude Code / GitHub Copilot / Cursor / Cline / Windsurf / Aider / Sweep / PR-Agent 等) が、[@genzouw](https://github.com/genzouw) が公開する OSS リポジトリで作業し Pull Request を作成するときに **必ず守るべき規範** を定義します。
 キーワードの解釈は [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt) ([日本語訳](https://www.nic.ad.jp/ja/tech/ipa/RFC2119JA.html)) に従います (MUST / MUST NOT / SHOULD / SHOULD NOT / MAY)。
 
 このファイルは [agents.md 規格](https://agents.md/) に従って配置しています。Jules や Codex などの主要エージェントは、このファイルをリポジトリルートから自動的に読み込みます。
