@@ -93,7 +93,7 @@ PR 説明文には以下を **MUST** で、**日本語で** 含めてくださ�
 - 技術用語 (GitHub Actions / CI/CD / API キー / Marketplace 等) と識別子は原語のままでよい。
 - コミットメッセージおよび PR タイトルは [Conventional Commits](https://www.conventionalcommits.org/ja/v1.0.0/) に従う。
 
-## 5. 例外申請プロセス (SHOULD)
+## 5. 例外申請プロセス (MUST)
 
 本ポリシーから外れる導入を検討したい場合は、PR を作成する **前に** Issue で提案し、リポジトリオーナー (@genzouw) の明示的な承認を **MUST** 取得してください。承認のない有料サービス導入 PR はリポジトリオーナー (@genzouw) によってクローズされます。
 Issue では「なぜ既存の無料サービスでは目的を達成できないか」「課金リスクをどう管理するか」を明確に書いてください。
