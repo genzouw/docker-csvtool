@@ -1,24 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    "helpers:pinGitHubActionDigests"
+  "description": [
+    "minimumReleaseAgeBehaviour: timestamp-optional は matchUpdateTypes で絞らず、あえてトップレベルに置く。",
+    "この設定は release timestamp を返さないデータソース（GHCR など）でのみ待機チェックを迂回させる効果があり、",
+    "timestamp を返すデータソースでは update type によらず minimumReleaseAge の待機がそのまま働く。",
+    "update type（digest かどうか）は「timestamp の有無」の不完全な代理指標でしかなく、",
+    "genzouw/trim-text#236 のように matchUpdateTypes: [\"digest\"] へ絞ると、",
+    "GHCR 発の digest 以外の更新（FROM タグの minor/major 更新など）が待機チェックを永久に満たせない詰まりを取りこぼす。"
   ],
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "semanticCommits": "enabled",
   "semanticCommitScope": "deps",
   "timezone": "Asia/Tokyo",
-  "schedule": [
-    "* 9 * * *"
-  ],
+  "schedule": ["* 9 * * *"],
   "minimumReleaseAge": "1 day",
   "minimumReleaseAgeBehaviour": "timestamp-optional",
   "prConcurrentLimit": 5,
-  "labels": [
-    "dependencies"
-  ],
-  "reviewers": [
-    "genzouw"
-  ],
+  "labels": ["dependencies"],
+  "reviewers": ["genzouw"],
   "vulnerabilityAlerts": {
     "description": [
       "脆弱性修正は minimumReleaseAge と schedule の対象外にして即時 PR にする。",
@@ -26,9 +25,7 @@
     ],
     "minimumReleaseAge": null,
     "schedule": [],
-    "addLabels": [
-      "security"
-    ]
+    "addLabels": ["security"]
   },
   "packageRules": [
     {
@@ -37,30 +34,19 @@
         "config:recommended に含まれる :semanticPrefixFixDepsChoreOthers は本番依存を fix にするが、",
         "fix は release 生成ツールがリリース対象として扱うため、Dependabot 時代と同じ chore に固定する。"
       ],
-      "matchPackageNames": [
-        "*"
-      ],
+      "matchPackageNames": ["*"],
       "semanticCommitType": "chore"
     },
     {
       "description": "GitHub Actions の更新は ci プレフィックスで出す (Dependabot の commit-message.prefix: ci と同じ)",
-      "matchManagers": [
-        "github-actions"
-      ],
+      "matchManagers": ["github-actions"],
       "semanticCommitType": "ci",
-      "addLabels": [
-        "github-actions"
-      ]
+      "addLabels": ["github-actions"]
     },
     {
       "description": "Docker ベースイメージの更新には docker ラベルを付ける",
-      "matchManagers": [
-        "dockerfile",
-        "docker-compose"
-      ],
-      "addLabels": [
-        "docker"
-      ]
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "addLabels": ["docker"]
     }
   ]
 }
