@@ -6,7 +6,8 @@
     "timestamp を返すデータソースでは update type によらず minimumReleaseAge の待機がそのまま働く。",
     "update type（digest かどうか）は「timestamp の有無」の不完全な代理指標でしかなく、",
     "genzouw/trim-text#236 のように matchUpdateTypes: [\"digest\"] へ絞ると、",
-    "GHCR 発の digest 以外の更新（FROM タグの minor/major 更新など）が待機チェックを永久に満たせない詰まりを取りこぼす。"
+    "GHCR 発の digest 以外の更新（FROM タグの minor/major 更新など）が待機チェックを永久に満たせない詰まりを取りこぼす。",
+    "schedule は週次（月曜のみ）から毎日 9〜12 時台の 4 時間にする。週次だと待機期間明けから次の schedule まで PR 作成が持ち越されていた（genzouw/trim-text#236）。Mend Renovate App の実行はおおむね 1 時間ごとで時刻を選べず、1 時間だけの窓では実行が入らない日に翌日へ持ち越されるため（https://docs.renovatebot.com/key-concepts/scheduling/）。"
   ],
   "extends": [
     "config:recommended",
@@ -16,7 +17,7 @@
   "semanticCommitScope": "deps",
   "timezone": "Asia/Tokyo",
   "schedule": [
-    "* 9 * * *"
+    "* 9-12 * * *"
   ],
   "minimumReleaseAge": "1 day",
   "minimumReleaseAgeBehaviour": "timestamp-optional",
