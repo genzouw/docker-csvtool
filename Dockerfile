@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:13-slim
 
 LABEL maintainer "genzouw <genzouw@gmail.com>"
 
