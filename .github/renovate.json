@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": [
-    "minimumReleaseAge は 7 日 → 1 日 に短縮する。公開から 1 日程度で更新 PR を作るため。問題のあるリリースを取り込むまでの猶予は 1 日に縮むが、automerge は無く更新 PR は人が確認してからマージする。",
-    "minimumReleaseAgeBehaviour は既定の timestamp-required のままにする。docker-csvtool で Renovate が更新を出す依存は、GitHub Actions から SHA pin で参照する genzouw/ci-workflows（github-tags）と、Dockerfile のベースイメージ debian（docker データソース）で、いずれも releaseTimestamp を返す想定のため timestamp-optional にする必要がなく、指定すると将来 timestamp を返さない依存を足したときに待機なしで PR が作られるため。Dockerfile は debian:13-slim とバージョン番号タグにしたので更新対象として検出される（検出結果は Dependency Dashboard #16 の Detected Dependencies で確認する）。",
+    "minimumReleaseAge は 7 日 → 3 日 にする。1 日では短く、公開直後の不具合やサプライチェーン攻撃のリスクを下げきれないため。automerge は無く更新 PR は人が確認してからマージする。",
+    "minimumReleaseAgeBehaviour は timestamp-optional にする。全リポジトリで設定を揃えるため。公開日時を返さないレジストリ（Docker Hub / GHCR 等）でも更新 PR が止まらないが、その依存には待機期間が効かない。docker-csvtool の更新対象は、GitHub Actions から SHA pin で参照する genzouw/ci-workflows（github-tags）と、Dockerfile のベースイメージ debian（docker データソース）。公開日時が取れないタグでは待機なしで PR が作られる。",
     "schedule は週次（月曜のみ）から毎日 9〜12 時台の 4 時間にする。週次だと待機期間明けから次の schedule まで PR 作成が持ち越されていた（genzouw/trim-text#236）。Mend Renovate App の実行はおおむね 1 時間ごとで時刻を選べず、1 時間だけの窓では実行が入らない日に翌日へ持ち越されるため（https://docs.renovatebot.com/key-concepts/scheduling/）。"
   ],
   "extends": [
@@ -15,7 +15,8 @@
   "schedule": [
     "* 9-12 * * *"
   ],
-  "minimumReleaseAge": "1 day",
+  "minimumReleaseAge": "3 days",
+  "minimumReleaseAgeBehaviour": "timestamp-optional",
   "prConcurrentLimit": 5,
   "labels": [
     "dependencies"
