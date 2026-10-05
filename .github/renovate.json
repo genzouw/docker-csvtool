@@ -59,6 +59,16 @@
       ]
     },
     {
+      "description": [
+        "distroless は :latest 相当で上げる先のタグが無いため、ダイジェスト固定にして更新を PR で受ける。",
+        "固定しないと、ビルドした時点の内容が黙って最終イメージに入り、同じコミットでも中身が時期で変わる。"
+      ],
+      "matchPackageNames": [
+        "gcr.io/distroless/**"
+      ],
+      "pinDigests": true
+    },
+    {
       "description": "Docker ベースイメージの更新には docker ラベルを付ける",
       "matchManagers": [
         "dockerfile",

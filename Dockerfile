@@ -9,8 +9,8 @@ RUN apt-get update \
 
 # csvtool が動的リンクするのは libc / libm のみ。Snyk は最終ステージの FROM だけを解析するため、
 # OS パッケージをほとんど持たない distroless に csvtool 本体だけを載せて検出対象を最小化する
-# hadolint ignore=DL3007
-FROM gcr.io/distroless/base-debian13:latest
+# ダイジェスト固定は Renovate（.github/renovate.json の pinDigests）が更新 PR で追従する
+FROM gcr.io/distroless/base-debian13@sha256:389cad21f73e4c37b94ffe5b13736d5a92bd5bd3c6c6b38c2be1c881e14ba2bd
 
 LABEL maintainer="genzouw <genzouw@gmail.com>"
 
