@@ -1,8 +1,6 @@
-FROM debian:13-slim
+FROM debian:13-slim AS builder
 
-LABEL maintainer "genzouw <genzouw@gmail.com>"
-
-# ベースイメージ公開後に Debian security へ出た修正版 (perl-base / openssl / libpcre2 / gzip / util-linux 等) を取り込む
+# ベースイメージ公開後に Debian security へ出た修正版を取り込む
 RUN apt-get update \
   && apt-get -y upgrade \
   && apt-get -y install \
@@ -11,4 +9,13 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-ENTRYPOINT ["csvtool"]
+# csvtool が動的リンクするのは libc / libm のみ。Snyk は最終ステージの FROM だけを解析するため、
+# OS パッケージをほとんど持たない distroless に csvtool 本体だけを載せて検出対象を最小化する
+# hadolint ignore=DL3007
+FROM gcr.io/distroless/base-debian13:latest
+
+LABEL maintainer="genzouw <genzouw@gmail.com>"
+
+COPY --from=builder /usr/bin/csvtool /usr/bin/csvtool
+
+ENTRYPOINT ["/usr/bin/csvtool"]
