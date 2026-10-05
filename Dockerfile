@@ -1,8 +1,6 @@
 FROM debian:13-slim AS builder
 
-# ベースイメージ公開後に Debian security へ出た修正版を取り込む
 RUN apt-get update \
-  && apt-get -y upgrade \
   && apt-get -y install \
     --no-install-recommends \
     csvtool \
