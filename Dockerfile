@@ -10,7 +10,7 @@ RUN apt-get update \
 # csvtool が動的リンクするのは libc / libm のみ。Snyk は最終ステージの FROM だけを解析するため、
 # OS パッケージをほとんど持たない distroless に csvtool 本体だけを載せて検出対象を最小化する
 # ダイジェスト固定は Renovate（.github/renovate.json の pinDigests）が更新 PR で追従する
-FROM gcr.io/distroless/base-debian13@sha256:44a80dc28b49f47396e72ab2dc644b3f849880335de09625762faed207bb891d
+FROM gcr.io/distroless/base-debian13@sha256:f5e95195e998742ff590b7569bae479accce1226e51ae6c3118954030121cdcb
 
 LABEL maintainer="genzouw <genzouw@gmail.com>"
 
